@@ -1,0 +1,27 @@
+# Reliafy minimal .nanorc for broad compatibility
+# Keeps only simple YAML highlighting and two basic UI settings.
+
+# Basic UI
+set tabsize 2
+set linenumbers
+
+# YAML syntax (fallback if system yaml.nanorc not present)
+syntax "yaml" "\.ya?ml$"
+# Comments
+color brightblack "^[[:space:]]*#.*$"
+# Booleans and null
+color magenta "\<(true|false|null)\>"
+# Numbers
+color brightcyan "\<([0-9]+|0x[0-9a-fA-F]+)\>"
+# Keys (at start of line or after spaces), followed by colon
+color yellow "(^|[[:space:]])[A-Za-z0-9_.-]+:\s"
+# Values on the same line after colon
+color green ":\s.*$"
+# Strings
+color brightyellow "\"[^\"]*\"|'[^']*'"
+
+# Highlight quotes and punctuation
+color red "[][{}]"
+
+# Trailing whitespace
+color ,red "[[:space:]]+$"

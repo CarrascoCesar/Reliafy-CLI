@@ -1,0 +1,79 @@
+site_name: Reliafy CLI
+site_url: https://reliafy.pages.dev
+repo_url: https://pypi.org/project/reliafy/
+repo_name: !ENV [RELIAFY_DOCS_REPO_NAME, PyPI]
+hooks:
+  - docs/hooks.py
+copyright: Copyright &copy; 2026 Reliafy. All rights reserved. Copyright registration pending.
+theme:
+  name: material
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: blue grey
+      accent: indigo
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: blue grey
+      accent: indigo
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    # - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - toc.follow
+extra:
+  math:
+    provider: mathjax
+nav:
+  - Home: index.md
+  - Packaged Examples: examples.md
+  - CLI Commands:
+    - Analyze: cli/analyze.md
+    - Design: cli/design.md
+    - Simulate: cli/simulate.md
+    - Result Files: cli/results-files.md
+  - Profiles:
+    - Profile Management: profiles/index.md
+    - Profile Options Reference: profiles/profile-reference.md
+  - Problem Definition:
+    - Overview: problem-authoring/index.md
+    - Analyze:
+      - FORM Only: problem-authoring/analyze/form-only.md
+      - SORM and Monte Carlo: problem-authoring/analyze/sorm-monte-carlo.md
+    - Design:
+      - Overview: problem-authoring/design/index.md
+      - Design Keys Reference: problem-authoring/design/design-keys.md
+      - Inverse FORM Examples: problem-authoring/design/inverse-form.md
+      - Objective Optimization Example: problem-authoring/design/optimization.md
+    - Simulate:
+      - Classic Monte Carlo: problem-authoring/simulate/classic-monte-carlo.md
+      - Importance Sampling: problem-authoring/simulate/importance-sampling.md
+  - Software References:
+    - Overview: software-references.md
+    - CLI Dependencies and Citations: software-references-cli.md
+    - API Library Credits: software-references-api.md
+  - User Authentication: auth.md
+markdown_extensions:
+  - admonition
+  - tables
+  - attr_list
+  - md_in_html
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.arithmatex
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.tabbed:
+      alternate_style: true
+plugins:
+  - search

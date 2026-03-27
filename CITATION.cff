@@ -1,0 +1,24 @@
+cff-version: 1.2.0
+message: >-
+  If you use Reliafy in scholarly work, please cite the software using this
+  metadata. Until a Zenodo DOI is minted, include the version used and the
+  project URLs below.
+title: Reliafy CLI
+type: software
+authors:
+  - family-names: Carrasco
+    given-names: Cesar
+version: 0.1.3
+abstract: >-
+  Command-line interface for reliability analysis, design optimization, and
+  simulation with profile-based configuration.
+url: https://pypi.org/project/reliafy/
+repository-code: https://github.com/CarrascoCesar/Reliafy-CLI
+repository-artifact: https://pypi.org/project/reliafy/
+license: Proprietary
+keywords:
+  - reliability analysis
+  - design optimization
+  - monte carlo simulation
+  - structural reliability
+  - command line interface
