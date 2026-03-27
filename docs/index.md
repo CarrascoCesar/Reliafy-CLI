@@ -36,6 +36,8 @@ Typical use cases include:
 
 For third-party Python library citation guidance, see [Software and Library References](software-references.md). That section separates:
 
+For citing Reliafy itself, see [Citing Reliafy](#citing-reliafy) below.
+
 - CLI dependencies users install in their environment
 - API dependencies documented for attribution/credit only
 
@@ -151,10 +153,6 @@ reliafy analyze --help
 reliafy profile --help
 ```
 
-## Contact
-
-For questions, feedback, or support, reach out at [reliafy.app@gmail.com](mailto:reliafy.app@gmail.com).
-
 ## Citing Reliafy
 
 If you use Reliafy in journal papers, reports, theses, or other scholarly work, cite Reliafy itself in addition to any underlying libraries or method references that are materially relevant to your work.
@@ -162,3 +160,7 @@ If you use Reliafy in journal papers, reports, theses, or other scholarly work, 
 - Carrasco, C. (2026). *Reliafy CLI*. Zenodo. <https://doi.org/10.5281/zenodo.19267557>
 
 Include the exact Reliafy version used in your work. For version-specific DOI citations, use the corresponding Zenodo release record.
+
+## Contact
+
+For questions, feedback, or support, reach out at [reliafy.app@gmail.com](mailto:reliafy.app@gmail.com).
