@@ -154,3 +154,11 @@ reliafy profile --help
 ## Contact
 
 For questions, feedback, or support, reach out at [reliafy.app@gmail.com](mailto:reliafy.app@gmail.com).
+
+## Citing Reliafy
+
+If you use Reliafy in journal papers, reports, theses, or other scholarly work, cite Reliafy itself in addition to any underlying libraries or method references that are materially relevant to your work.
+
+- Carrasco, C. (2026). *Reliafy CLI*. Zenodo. <https://doi.org/10.5281/zenodo.19267557>
+
+Include the exact Reliafy version used in your work. For version-specific DOI citations, use the corresponding Zenodo release record.

@@ -5,14 +5,15 @@ type: software
 authors:
   - family-names: Carrasco
     given-names: Cesar
-version: 0.1.5
+version: 0.1.6
 date-released: 2026-03-27
+doi: 10.5281/zenodo.19267557
 abstract: >-
   Command-line interface for reliability analysis, design optimization, and
   simulation with profile-based configuration.
-url: https://pypi.org/project/reliafy/
+url: https://doi.org/10.5281/zenodo.19267557
 repository-code: https://github.com/CarrascoCesar/Reliafy-CLI
-repository-artifact: https://pypi.org/project/reliafy/
+repository-artifact: https://zenodo.org/records/19267557
 keywords:
   - reliability analysis
   - design optimization

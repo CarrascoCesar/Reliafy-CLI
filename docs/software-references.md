@@ -12,12 +12,6 @@ This section covers the Python packages that Reliafy CLI and its backing API dep
 - Reliafy follows each package author's official citation instructions when they are available.
 - If no formal citation guidance is published, Reliafy cites the project's official documentation or PyPI page and includes the exact version used.
 
-## Citing Reliafy
-
-- If you use Reliafy in journal papers, reports, theses, or other scholarly work, cite Reliafy itself in addition to any underlying libraries or method references that are materially relevant to your work.
-- Until a dedicated Reliafy paper or software citation record is published, use the official PyPI project page as the primary software reference: <https://pypi.org/project/reliafy/>
-- Include the exact Reliafy version used in your work.
-
 ## Method References
 
 - Method-specific references are maintained on method pages. For example, SORM and IS algorithm references are documented in [Profile Options Reference](profiles/profile-reference.md).

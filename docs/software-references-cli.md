@@ -2,7 +2,7 @@
 
 This page lists the top-level Python packages that Reliafy CLI depends on. Use it as a reference for citing software libraries in papers, reports, and technical notes.
 
-If you are citing Reliafy itself, also cite the official PyPI project page until a dedicated Reliafy publication or software citation record is available: <https://pypi.org/project/reliafy/>
+If you are citing Reliafy itself, cite the Zenodo software record: Carrasco, C. (2026). *Reliafy CLI*. Zenodo. <https://doi.org/10.5281/zenodo.19267557>. If you need a fixed-version citation, use the version-specific Zenodo DOI for that release.
 
 Only direct, top-level dependencies are listed — transitive packages installed automatically as dependencies of these libraries are not included.
 
