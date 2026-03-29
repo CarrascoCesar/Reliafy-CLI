@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://reliafy.pages.dev/sitemap.xml
