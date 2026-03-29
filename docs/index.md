@@ -1,4 +1,4 @@
-# Reliafy CLI Documentation
+# Reliafy CLI: FORM, SORM, RBDO, and Monte Carlo Simulation in Python
 
 Reliafy CLI is a Python-based command-line interface for reliability analysis, reliability-based design optimization, and simulation workflows with profile-based configuration.
 
@@ -32,14 +32,29 @@ Typical use cases include:
 - Robert, Christian P., and Casella, George. (2004). *Monte Carlo Statistical Methods*. Springer New York.
 - Sørensen, John Dalsgaard. (2004). *Notes in Structural Reliability Theory and Risk Analysis*. Aalborg, February 2004. [→](https://filelist.tudelft.nl/TBM/Over%20faculteit/Afdelingen/Values%2C%20Technology%20and%20Innovation/People/Full%20Professors/Pieter%20van%20Gelder/Citations/citatie215.pdf)
 
-### Software References
+## Core Workflows
 
-For third-party Python library citation guidance, see [Software and Library References](software-references.md). That section separates:
+Reliafy CLI provides five core reliability workflows:
 
-For citing Reliafy itself, see [Citing Reliafy](#citing-reliafy) below.
+### First-Order Reliability Method (FORM)
+Fast baseline reliability assessment. Provides reliability index (β), failure probability (Pf), and most probable point (MPP). Ideal for screening and sensitivity analysis.  
+→ [Analyze Command](cli/analyze.md) | [FORM Example](problem-authoring/analyze/form-only.md)
 
-- CLI dependencies users install in their environment
-- API dependencies documented for attribution/credit only
+### Second-Order Reliability Method (SORM)
+Curvature-aware refinement near the most probable point (MPP). Used after FORM for improved approximation at the MPP.  
+→ [SORM + Monte Carlo Example](problem-authoring/analyze/sorm-monte-carlo.md)
+
+### Inverse FORM and Inverse SORM
+Code calibration and reliability factor derivation. When no objective function is defined, computes partial factors or design point values that satisfy a target reliability index. Useful for load/resistance factor calibration and characteristic-value back-calculation.  
+→ [Design Command](cli/design.md) | [Inverse FORM Examples](problem-authoring/design/inverse-form.md)
+
+### Reliability-Based Design Optimization (RBDO)
+Optimization under reliability constraints. When an objective function is defined in the problem, computes design variable values that minimize the objective while satisfying reliability constraints.  
+→ [Design Command](cli/design.md) | [Optimization Examples](problem-authoring/design/optimization.md)
+
+### Monte Carlo Simulation and Importance Sampling
+Distribution-level validation and robustness checks. Provides empirical failure probability and tail behavior analysis.  
+→ [Simulate Command](cli/simulate.md) | [Classic Monte Carlo](problem-authoring/simulate/classic-monte-carlo.md) | [Importance Sampling](problem-authoring/simulate/importance-sampling.md)
 
 ## Quick Start
 
@@ -78,20 +93,26 @@ For citing Reliafy itself, see [Citing Reliafy](#citing-reliafy) below.
 
 When you run an analysis, design, or simulation command, Reliafy opens a file-picker popup so you can select the problem file to execute. If you are new to problem files, start with [Examples](examples.md) and then see [Problem Definition](problem-authoring/index.md) for how custom files are structured.
 
-### Analysis
-Run reliability analysis using FORM, SORM, and Monte Carlo methods:
+### Analyze: Forward Reliability Assessment
+Run forward reliability analysis using FORM, SORM, and Monte Carlo methods to estimate failure probability and MPP sensitivity.
 
 Usage: `reliafy analyze <profile> [OPTIONS]`
 
-### Design Optimization
-Run reliability-based design optimization:
+[Full options and examples →](cli/analyze.md)
+
+### Design: Design Optimization and Factor Calibration
+Run design workflows using Inverse FORM and Inverse SORM methods. Supports two modes: (1) code calibration via Inverse FORM when no objective function is present, and (2) reliability-based design optimization when an objective function is defined to minimize cost/weight/performance while meeting reliability constraints.
 
 Usage: `reliafy design <profile> [OPTIONS]`
 
-### Simulation
-Run Monte Carlo simulation with importance sampling:
+[Full options and examples →](cli/design.md)
+
+### Simulate: Monte Carlo Simulation with Importance Sampling
+Run Monte Carlo simulation with optional importance sampling for rare-event probability validation and robustness verification.
 
 Usage: `reliafy simulate <profile> [OPTIONS]`
+
+[Full options and examples →](cli/simulate.md)
 
 ## Configuration
 
@@ -152,6 +173,13 @@ reliafy --help
 reliafy analyze --help
 reliafy profile --help
 ```
+
+## Software References
+
+For third-party Python library citation guidance, see [Software and Library References](software-references.md). That section separates:
+
+- CLI dependencies users install in their environment
+- API dependencies documented for attribution/credit only
 
 ## Citing Reliafy
 
