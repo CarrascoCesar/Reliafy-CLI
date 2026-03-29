@@ -19,7 +19,7 @@ def on_config(config):
         with pyproject_path.open("rb") as f:
             data = tomllib.load(f)
         version = data["project"]["version"]
-        config["repo_name"] = f"PyPI v{version}"
+        config["repo_name"] = f"GitHub v{version}"
     except Exception:
         # Keep configured fallback when version cannot be read.
         pass

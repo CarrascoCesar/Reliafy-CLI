@@ -1,6 +1,10 @@
 # Reliafy CLI
 
-Reliafy CLI provides reliability analysis, design, and simulation workflows with simple profile-based configuration.
+Reliafy CLI is a Python-based command-line interface for reliability analysis, reliability-based design optimization, and simulation workflows with profile-based configuration.
+
+Core capabilities include First-Order Reliability Method (FORM), Second-Order Reliability Method (SORM), Inverse FORM, Inverse SORM, Monte Carlo simulation, and Importance Sampling for rare-event probability estimation. These workflows cover forward reliability evaluation, reliability-constrained design, and post-design simulation using a consistent problem-module interface. Reliafy supports correlated, non-normal random variables through the Nataf transformation, an isoprobabilistic mapping to standard normal space.
+
+Run outputs are designed for practical engineering decisions and reporting workflows. Depending on options, results include reliability metrics and design points, tabulated summaries (Excel/JSON), plot reports (PDF), and pickled Matplotlib figure objects for post-processing.
 
 ## Quick Start
 
@@ -41,8 +45,7 @@ reliafy profile rename oldname newname
 The complete documentation site is built with MkDocs Material.
 
 - Site navigation mirrors CLI commands and common tasks.
-- Methods are domain-independent (engineering, finance, statistics, medicine): see the Unified View section at https://reliafy.pages.dev/#unified-view-across-domains.
-- Developer preview: `mkdocs serve` then open the shown URL.
+- To preview the docs locally, run `mkdocs serve` from the project root and open the URL printed in the terminal (typically `http://127.0.0.1:8000`).
 
 ## Requirements
 

@@ -103,8 +103,8 @@ def analyze(
     ] = False,
     open_results: Annotated[
         bool,
-        typer.Option("--open-results", "-o"), # , help=open_results_help, rich_help_panel="General"),
-    ] = True,
+        typer.Option("--open-results", "-o", help=open_results_help, rich_help_panel="General"),
+    ] = False,
 ):
     """Run reliability analysis with specified options."""
     (
@@ -141,7 +141,7 @@ def analyze(
     summary_table.add_column("plot_rfad", style="magenta", no_wrap=True)
     summary_table.add_column("plot_lsf", style="magenta", no_wrap=True)
     summary_table.add_column("plot_pdfs", style="magenta", no_wrap=True)
-    # summary_table.add_column("open_results", style="green", no_wrap=True)
+    summary_table.add_column("open_results", style="green", no_wrap=True)
 
     def _fmt(v: bool) -> str:
         return f"[green]True[/green]" if v else "[dim]False[/dim]"
@@ -153,7 +153,7 @@ def analyze(
         _fmt(plot_rfad),
         _fmt(plot_lsf),
         _fmt(plot_pdfs),
-        # _fmt(open_results),
+        _fmt(open_results),
     )
     console.print(summary_table)
     run_app(
@@ -180,8 +180,8 @@ def design(
     ] = False,
     open_results: Annotated[
         bool,
-        typer.Option("--open-results", "-o"), # , help=open_results_help, rich_help_panel="General"),
-    ] = True,
+        typer.Option("--open-results", "-o", help=open_results_help, rich_help_panel="General"),
+    ] = False,
 ):
     """Run reliability-based design optimization with specified options."""
     (
@@ -197,15 +197,16 @@ def design(
 
     run_configuration.run_type = RunTypeEnum.design
     run_configuration.include_sorm = use_sorm
+
     # Rich table summary (single option for now, extensible later)
     design_title = f"{ICON_RUN} Running design optimization with '{profile}' profile"
     console.print(f"[bold]{design_title}[/bold]")
     design_table = Table(show_lines=False, pad_edge=True)
     design_table.add_column("use_sorm", style="blue", no_wrap=True)
-    # design_table.add_column("open_results", style="green", no_wrap=True)
+    design_table.add_column("open_results", style="green", no_wrap=True)
     design_table.add_row(
         "[green]True[/green]" if use_sorm else "[dim]False[/dim]",
-        # "[green]True[/green]" if open_results else "[dim]False[/dim]",
+        "[green]True[/green]" if open_results else "[dim]False[/dim]",
     )
     console.print(design_table)
     run_app(
@@ -219,7 +220,7 @@ def design(
     )
     console.print()
 
-# Register aliase 'des' that points to the same function
+# Register alias 'des' that points to the same function
 app.command(name="des", help="Alias for design", hidden=True)(design)
 
 
@@ -248,8 +249,8 @@ def simulate(
     ] = False,
     open_results: Annotated[
         bool,
-        typer.Option("--open-results", "-o"), # , help=open_results_help, rich_help_panel="General"),
-    ] = True,
+        typer.Option("--open-results", "-o", help=open_results_help, rich_help_panel="General"),
+    ] = False,
 ):
     """Run Monte Carlo simulation with specified options."""
     (
@@ -291,6 +292,7 @@ def simulate(
     run_configuration.include_sorm = include_sorm
     run_configuration.plot_lsf = plot_lsf
     run_configuration.plot_pdfs = plot_pdfs
+
     # Rich table summary (no options for now, extensible later)
     sim_title = f"{ICON_RUN} Running Monte Carlo simulation with '{profile}' profile"
     console.print(f"[bold]{sim_title}[/bold]")
@@ -300,7 +302,7 @@ def simulate(
     sim_table.add_column("include_sorm", style="cyan", no_wrap=True)
     sim_table.add_column("plot_lsf", style="magenta", no_wrap=True)
     sim_table.add_column("plot_pdfs", style="magenta", no_wrap=True)
-    # sim_table.add_column("open_results", style="green", no_wrap=True)
+    sim_table.add_column("open_results", style="green", no_wrap=True)
 
     def _fmt(v: bool) -> str:
         return f"[green]True[/green]" if v else "[dim]False[/dim]"
@@ -311,7 +313,7 @@ def simulate(
         _fmt(include_sorm),
         _fmt(plot_lsf),
         _fmt(plot_pdfs),
-        # _fmt(open_results),
+        _fmt(open_results),
     )
 
     console.print(sim_table)

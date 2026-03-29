@@ -490,6 +490,7 @@ def run_app(
     reliability_options: Dict,
     profile_name: str = "",
     open_results: bool = False,
+    problem_file_path: Path | None = None,
 ) -> Dict:
     """
     Post the problem module and options to the API, then download and open results.
@@ -523,10 +524,13 @@ def run_app(
             raise SystemExit(1)
 
     # 2b) Ask user for problem file
-    console.print(f"{ICON_INFO} Please select a problem file from the popup menu.\n")
-    selected_file = get_problem_file_name(Path(problems_path))
-    if not selected_file:
-        raise SystemExit(1)
+    if problem_file_path is None:
+        console.print(f"{ICON_INFO} Please select a problem file from the popup menu.\n")
+        selected_file = get_problem_file_name(Path(problems_path))
+        if not selected_file:
+            raise SystemExit(1)
+    else:
+        selected_file = str(problem_file_path)
 
     problem_file_path = Path(selected_file)
     valid = validate_problem_module(problem_file_path, run_configuration)
@@ -632,7 +636,9 @@ def run_app(
     # 7) Create timestamped directory for this run
     timestamped_dir = get_timestamped_results_dir(results_path)
     # console.print(f"{ICON_INFO} Results timestamped_dir created: {timestamped_dir.relative_to(results_path.parent)}\n")
-    console.print(f"{ICON_OK} Result and profile files will be saved to: {timestamped_dir}\n")
+    console.print(
+        f"{ICON_OK} Result files, a copy of the problem file, and the profile will be saved to: {timestamped_dir}\n"
+    )
 
     # 8) Save server returned problem to timestamped directory as JSON
     out_json_path = Path(timestamped_dir, f"{problem_json.get('name', 'result')}-{request_id[-5:]}.json")
@@ -642,7 +648,22 @@ def run_app(
     except Exception as e:
         console.print(f"{ICON_WARN} Failed saving problem JSON to {out_json_path}: {e}")
 
-    # 9) Save profile to results directory
+    # 10) Download files to the timestamped directory
+    file_paths, file_downloaded = download_results(url, problem_json, timestamped_dir, reporting_options, max_retries=3)
+
+    # 11) Optional: Clean up old results (keeping last 30 days by default)
+    # Uncomment the line below to enable automatic cleanup
+    # cleanup_old_results(results_path, days=30)
+
+    # 12) Save a copy of the problem .py file to the results directory for reference
+    try:
+        problem_py_copy_path = Path(timestamped_dir, f"{problem_json.get('name', 'result')}-{request_id[-5:]}.py")
+        shutil.copy2(problem_file_path, problem_py_copy_path)
+        console.print(f"{ICON_OK} Copied problem file to results: {problem_py_copy_path.name}")
+    except Exception as e:
+        console.print(f"{ICON_WARN} Failed copying problem .py file to results directory: {e}")
+
+    # 13) Save profile to results directory
     profile_data = OrderedDict(
         {
             "name": profile_name,
@@ -658,22 +679,7 @@ def run_app(
     save_result_yaml_profile(profile_path, profile_data)
     console.print(f"{ICON_OK} Saved configuration profile: {profile_path.name}")
 
-    # 10) Save a copy of the problem .py file to the results directory for reference
-    try:
-        problem_py_copy_path = Path(timestamped_dir, f"{problem_file_path.stem}-{request_id[-5:]}.py")
-        shutil.copy2(problem_file_path, problem_py_copy_path)
-        console.print(f"{ICON_OK} Copied problem file to results: {problem_py_copy_path.name}")
-    except Exception as e:
-        console.print(f"{ICON_WARN} Failed copying problem .py file to results directory: {e}")
-
-    # 11) Download files to the timestamped directory
-    file_paths, file_downloaded = download_results(url, problem_json, timestamped_dir, reporting_options, max_retries=3)
-
-    # 12) Optional: Clean up old results (keeping last 30 days by default)
-    # Uncomment the line below to enable automatic cleanup
-    # cleanup_old_results(results_path, days=30)
-
-    # 13) Open files and show pickles
+    # 14) Open files and show pickles
     if open_results:
         open_result_files(file_paths, file_downloaded)
         show_pickle_plots(problem_json, file_paths, reporting_options, file_downloaded)
@@ -691,7 +697,7 @@ def get_problem_file_name(problems_path: Path) -> Path | None:
     latest_py_file = max(py_files, default=None, key=lambda p: p.stat().st_mtime) if py_files else None
 
     selected_file = filedialpy.openFile(
-        initial_dir=problems_path.as_posix(),
+        initial_dir=str(problems_path),
         filter="*.py",
         title="Select a problem file",
         initial_file=str(latest_py_file) if latest_py_file else "",
@@ -730,7 +736,7 @@ def get_problem_file_name_tk(problems_path: Path) -> Path | None:
         root.update_idletasks()
 
         selected = filedialog.askopenfilename(
-            initialdir=problems_path.as_posix(),
+            initialdir=str(problems_path),
             initialfile=latest_py_file.name if latest_py_file else "",
             title="Select a problem file",
             filetypes=[("Python files", "*.py"), ("All files", "*.*")],
@@ -748,7 +754,5 @@ def get_problem_file_name_tk(problems_path: Path) -> Path | None:
             return p
     return None
 
-
-# api_utils.py
 
 # api_utils.py

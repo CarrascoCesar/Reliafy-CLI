@@ -32,7 +32,7 @@ Usage: `reliafy analyze <profile> [OPTIONS]`
 
 ### General Options
 
-- `--open-results`, `-o`: Open result files after completion — including the Excel report, the PDF report, and any Matplotlib figures saved as pickle files (default: True)
+- `--open-results`, `-o`: Open result files after completion — including the Excel report, the PDF report, and any Matplotlib figures saved as pickle files
 
 ## Examples
 
