@@ -1,6 +1,6 @@
-# Simulate
+# Simulate: Monte Carlo Simulation with Importance Sampling
 
-Run Monte Carlo simulation with optional importance sampling and FORM/SORM analysis.
+Run Monte Carlo simulation with optional importance sampling for rare-event failure probability estimation. Optionally include FORM and SORM analysis alongside the simulation for comparative results.
 
 !!! info "Before your first run"
 	If you want to test this command with packaged sample problems, first run:

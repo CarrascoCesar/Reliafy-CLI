@@ -1,6 +1,6 @@
-# Analyze
+# Analyze: Forward Reliability Assessment
 
-Run reliability analysis using FORM, SORM, and Monte Carlo methods.
+Run forward reliability analysis using the First-Order Reliability Method (FORM), Second-Order Reliability Method (SORM), and Monte Carlo simulation to estimate failure probability, reliability index (β), and most probable point (MPP).
 
 !!! info "Before your first run"
 	If you want to test this command with packaged sample problems, first run:

@@ -1,6 +1,6 @@
-# Design
+# Design: Factor Calibration and Reliability-Based Design Optimization
 
-Run reliability-based design optimization (RBDO) with specified options.
+Run design workflows that support two distinct modes depending on the problem definition: code calibration and partial factor derivation using Inverse FORM or Inverse SORM when no objective function is defined, or reliability-based design optimization (RBDO) when an objective function is defined to minimize cost, weight, or performance while satisfying reliability constraints.
 
 !!! info "Before your first run"
 	If you want to test this command with packaged sample problems, first run:
