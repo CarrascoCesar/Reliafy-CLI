@@ -11,7 +11,7 @@ The documentation is written for practical use rather than theory derivation. It
 !!! info "Pricing and Sustainability Notice"
     Reliafy CLI is **free to use** at this time. The CLI communicates with a hosted API, and the associated computation and infrastructure costs are currently funded by the developer during this early phase of operation.
 
-    To support ongoing maintenance and service delivery as usage grows, a monthly subscription of approximately **$8/month** is planned for a future release. Payment processing will be handled through [Stripe](https://stripe.com).
+    To support ongoing maintenance and service delivery as usage grows, a monthly subscription of approximately **$8/month** is planned for a future release.
 
     Any transition from free access to a paid subscription model will be communicated in advance. Existing users will receive clear notice before any pricing changes take effect.
 
