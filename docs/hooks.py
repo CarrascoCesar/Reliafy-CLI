@@ -25,3 +25,18 @@ def on_config(config):
         pass
 
     return config
+
+
+def on_post_build(config, **kwargs):
+    """Write robots.txt with the sitemap URL for the active site_url."""
+    site_url = str(config.get("site_url", "")).rstrip("/")
+    if not site_url:
+        return
+
+    robots_path = Path(config["site_dir"]) / "robots.txt"
+    robots_path.write_text(
+        "User-agent: *\n"
+        "Allow: /\n\n"
+        f"Sitemap: {site_url}/sitemap.xml\n",
+        encoding="utf-8",
+    )
