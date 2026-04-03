@@ -1,5 +1,5 @@
 site_name: Reliafy CLI
-site_url: !ENV [SITE_URL, https://reliafy.pages.dev]
+site_url: !ENV [SITE_URL, https://reliafy.app]
 repo_url: https://github.com/CarrascoCesar/Reliafy-CLI
 repo_name: !ENV [RELIAFY_DOCS_REPO_NAME, GitHub]
 hooks:

@@ -63,7 +63,7 @@ python -m unittest discover tests -p 'test_*.py' -v
 RELIAFY_RUN_API_TESTS=1 python -m unittest tests.test_cli_api_integration -v
 ```
 
-See [TESTING.md](TESTING.md) for details on test structure and rate limit behavior.
+See the [testing guide](https://github.com/CarrascoCesar/Reliafy-CLI/blob/main/TESTING.md) for details on test structure and rate limit behavior.
 
 ## Notes
 
