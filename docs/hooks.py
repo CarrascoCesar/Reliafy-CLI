@@ -35,8 +35,6 @@ def on_post_build(config, **kwargs):
 
     robots_path = Path(config["site_dir"]) / "robots.txt"
     robots_path.write_text(
-        "User-agent: *\n"
-        "Allow: /\n\n"
-        f"Sitemap: {site_url}/sitemap.xml\n",
+        "User-agent: *\n" "Allow: /\n\n" f"Sitemap: {site_url}/sitemap.xml\n",
         encoding="utf-8",
     )
