@@ -1,5 +1,5 @@
 site_name: Reliafy CLI
-site_url: https://reliafy.pages.dev
+site_url: !ENV [SITE_URL, https://reliafy.pages.dev]
 repo_url: https://github.com/CarrascoCesar/Reliafy-CLI
 repo_name: !ENV [RELIAFY_DOCS_REPO_NAME, GitHub]
 hooks:
@@ -7,18 +7,20 @@ hooks:
 copyright: Copyright &copy; 2026 Reliafy. All rights reserved. Copyright registration pending.
 theme:
   name: material
+  logo: Reliafy logo.png
+  favicon: Reliafy logo.png
   palette:
     - media: "(prefers-color-scheme: light)"
       scheme: default
-      primary: blue grey
-      accent: indigo
+      primary: deep-orange
+      accent: deep-orange
       toggle:
         icon: material/weather-night
         name: Switch to dark mode
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
-      primary: blue grey
-      accent: indigo
+      primary: deep-orange
+      accent: deep-orange
       toggle:
         icon: material/weather-sunny
         name: Switch to light mode
@@ -38,6 +40,7 @@ nav:
   - Home: index.md
   - Packaged Examples: examples.md
   - CLI Commands:
+    - Command Overview: cli/command-overview.md
     - Analyze: cli/analyze.md
     - Design: cli/design.md
     - Simulate: cli/simulate.md
@@ -58,6 +61,7 @@ nav:
     - Simulate:
       - Classic Monte Carlo: problem-authoring/simulate/classic-monte-carlo.md
       - Importance Sampling: problem-authoring/simulate/importance-sampling.md
+    - Recommended Texts: problem-authoring/recommended-texts.md
   - Software References:
     - Overview: software-references.md
     - CLI Dependencies and Citations: software-references-cli.md
@@ -77,3 +81,5 @@ markdown_extensions:
       alternate_style: true
 plugins:
   - search
+extra_css:
+  - stylesheets/extra.css
