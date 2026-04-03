@@ -5,6 +5,8 @@ This page documents a full `design` run where the objective function is minimize
 Note: Table values are rounded to 4 significant figures for readability. Very small/large values use scientific notation. Refer to the Excel/JSON result files for full precision.
 Note: Advanced solver diagnostics (for example `br_mult`, `lsf_mult`, and `bnds_mult` Lagrange multipliers) are included in the Excel/JSON result files and are not shown in the tables below.
 
+**SORM-based reliability constraint:** Pass `--use-sorm` (or `-s`) to the `design` command to use SORM-based reliability instead of FORM-based reliability when matching the optimization result to the target reliability. The problem file structure is identical for both methods.
+
 ## Run Context
 
 Problem module:

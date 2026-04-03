@@ -1,0 +1,8 @@
+/* Keep parameter-name columns readable on desktop/tablet by preventing wraps
+   in the first table column while preserving mobile responsiveness. */
+@media screen and (min-width: 76.25em) {
+  .md-typeset table:not([class]) th:first-child,
+  .md-typeset table:not([class]) td:first-child {
+    white-space: nowrap;
+  }
+}

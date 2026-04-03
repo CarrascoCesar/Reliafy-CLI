@@ -5,6 +5,8 @@ This page documents two inverse reliability design examples based on saved `desi
 Note: Table values are rounded to 4 significant figures for readability. Very small/large values use scientific notation. Refer to the Excel/JSON result files for full precision.
 Note: Advanced solver diagnostics (for example `bsr_mult` and `bnds_mult` Lagrange multipliers) are included in the Excel/JSON result files and are not shown in the tables below.
 
+**Inverse SORM:** Pass `--use-sorm` (or `-s`) to the `design` command to switch the solution algorithm from Inverse FORM to Inverse SORM. All examples on this page were run without this flag (Inverse FORM). The problem file structure is identical for both methods.
+
 ## Plot Behavior For `design` Runs
 
 Reliafy does not generate plots as part of `design` runs (including Inverse FORM).

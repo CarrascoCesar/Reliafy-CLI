@@ -3,7 +3,7 @@ Reliafy CLI - Command-line interface for reliability analysis and design using t
 Copyright (c) 2025 Cesar Carrasco. All rights reserved.
 """
 
-__version__ = "0.1.7"
+__version__ = "0.2.0"
 __author__ = "Cesar Carrasco"
 __email__ = "reliafy.app@gmail.com"  # Optional
 __description__ = "Command-line interface for reliability analysis and design using the Reliafy API"

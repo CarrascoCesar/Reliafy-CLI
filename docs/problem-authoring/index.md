@@ -106,8 +106,8 @@ Advanced/optional fields can also be used depending on model needs:
 
 | Key | Required | Type | Meaning |
 |---|---|---|---|
-| `lb` | No | `list[float]` | Lower bounds per stochastic variable |
-| `ub` | No | `list[float]` | Upper bounds per stochastic variable |
+| `lb` | Conditional | `list[float]` | Lower bounds per stochastic variable; required for some distributions and optional otherwise |
+| `ub` | Conditional | `list[float]` | Upper bounds per stochastic variable; required for some distributions and optional otherwise |
 | `truncated` | No | `list[bool]` | Whether each variable distribution is truncated to `[lb, ub]` |
 | `constraints` | No | `list[dict]` | Additional nonlinear constraints on stochastic variables |
 
@@ -178,9 +178,16 @@ Example pattern (`None` marks the unused pair for that variable):
 | `pareto` | `pareto` | Yes | Yes | `xm` | `α` | Optional |
 | `rayleigh` | `rayleigh` | Yes | No | `σ` | `None` | Optional |
 
+`*` Uniform distribution guidance:
+
+- When `mean` and `std` are specified, set both `lb` and `ub` to `None`.
+- When using distribution parameters (`lb`, `ub`), set `param1` and `param2` to `None`.
+
 Greek symbols shown for `param1` and `param2` follow the standard notation used in the linked Wikipedia references (where applicable).
 
 Parameterizations can differ across sources; Reliafy follows the parameter definitions documented by the linked SciPy distributions.
+
+For correlated non-normal variables, Reliafy uses an isoprobabilistic transformation (Nataf) to map variables into standard normal space during reliability computations.
 
 Reference links (from source doc):
 
@@ -198,12 +205,7 @@ Reference links (from source doc):
 - `pareto`: [Wikipedia](https://en.wikipedia.org/wiki/Pareto_distribution), [SciPy `pareto`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.pareto.html)
 - `rayleigh`: [Wikipedia](https://en.wikipedia.org/wiki/Rayleigh_distribution), [SciPy `rayleigh`](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.rayleigh.html)
 
-`*` Uniform distribution guidance:
-
-- When `mean` and `std` are specified, set both `lb` and `ub` to `None`.
-- When using distribution parameters (`lb`, `ub`), set `param1` and `param2` to `None`.
-
-Type strings are typically written in lowercase (for example `"lognormal"`), but existing examples also show mixed-case entries (for example `"GumbelMax"`).
+Type strings are case-insensitive: both lowercase (for example `"lognormal"`) and camelCase (for example `"gumbelMax"`) are accepted.
 
 ## Plot Definition Keys (`LSFplot`, `RFADplot`, `ISplot`)
 
@@ -254,7 +256,7 @@ Here, stochastic variables are indexed as `S[0]` for Y, `S[1]` for Z, and `S[2]`
 
 ### `RFADplot`
 
-`RFADplot` defines the axes of a Reliability-based Failure Assessment Diagram (RFAD). Reliafy sweeps the `x_param` of `x_var` across `x_lim` and the `y_param` of `y_var` across `y_lim`, computing the reliability index for each combination to produce an iso-reliability contour map. Run with `reliafy analyze -r`.
+`RFADplot` defines the axes of a Reliability-based Failure Assessment Diagram (RFAD). Reliafy sweeps the `x_param` of `x_var` across `x_lim` and the `y_param` of `y_var` across `y_lim`, computing the reliability index, probability of failure, and alpha vectors for each combination to produce an iso-reliability contour map. Run with `reliafy analyze -r`.
 
 **Required and optional keys:**
 
@@ -294,10 +296,14 @@ Here `S[0]` is Y, `S[1]` is Z, and `S[2]` is M. As Reliafy sweeps `mean(Y)` and 
 
 ### `ISplot`
 
+`ISplot` defines the axis variables and plot extents used for importance-sampling proposal diagnostics when running `reliafy simulate -i`. If `ISplot` is omitted, IS proposal diagnostic figures are not generated. If sampled points fall outside the specified limits, Reliafy automatically expands the displayed axis ranges.
+
 | Key | Required if `ISplot` exists | Meaning |
 |---|---|---|
-| `x_var` | Yes | Variable name for importance-sampling scatter/hist diagnostics |
-| `y_var` | Yes | Variable name for paired diagnostic axis |
+| `x_var` | Yes | Stochastic variable name used on the x axis for IS proposal diagnostics |
+| `x_lim` | Yes | Plot range `[min, max]` for the x axis |
+| `y_var` | Yes | Stochastic variable name used on the y axis for IS proposal diagnostics |
+| `y_lim` | Yes | Plot range `[min, max]` for the y axis |
 
 ## Limit State Function Contract
 
@@ -306,6 +312,13 @@ Your `LSF` must accept:
 - `X`: stochastic variables
 - `D`: deterministic variables
 
+Expected argument order:
+
+- `X` follows the order of `StochasticVariables.name`.
+- `D` follows the order of `DeterministicVariables.name`.
+
+This means `X` is the stochastic-variable vector (or batch of vectors), while `D` is the deterministic state used by the problem definition.
+
 Expected shape behavior:
 
 - Vectorized mode (`LSFisVectorized=True`):
@@ -313,6 +326,7 @@ Expected shape behavior:
   - each row corresponds to one variable in `StochasticVariables.name` order.
 - Single-point mode:
   - `X` can be `(n_var,)`.
+- `D` follows the deterministic-variable ordering from `DeterministicVariables.name`.
 
 ### Required return values
 
@@ -350,7 +364,9 @@ For a single point (`X.ndim == 1`):
 - Shape should be `(n_var, n_var)`.
 - Keep symmetry when mathematically expected.
 
-## Derivative Return Modes
+As with the gradient, `gh` is typically only returned for single-point evaluations in the standard Reliafy authoring pattern.
+
+## LSF Derivative Return Modes
 
 Use the flags to match what your function returns:
 
@@ -360,9 +376,38 @@ Use the flags to match what your function returns:
 | `True` | `False` | Return valid `gg`; `gh` can be placeholder; still return `L`, `R` |
 | `True` | `True` | Return valid `gg` and `gh`; still return `L`, `R` |
 
-## Worked Derivative Example (AT610)
+## Worked LSF Example (`AT610Problem.py`)
 
-From `AT610Problem.py`, with variables `Y`, `Z`, `M`:
+In `AT610Problem.py`, the stochastic variables are `Y`, `Z`, and `M`, and there are no deterministic variables:
+
+- `StochasticVariables.name = ["Y", "Z", "M"]`
+- `DeterministicVariables.name = []`
+
+The limit state function is:
+
+```python
+def LSF(X, D):
+    Y, Z, M = X
+
+    L = M  # Load
+    R = Y * Z  # Resistance
+
+    g = R - L
+
+    gg = []
+    gh = []
+    if X.ndim == 1:
+        gg = np.array([Z, Y, -1.0])
+        gh = np.array([
+            [0.0, 1.0, 0.0],
+            [1.0, 0.0, 0.0],
+            [0.0, 0.0, 0.0],
+        ])
+
+    return g, gg, gh, L, R
+```
+
+For that example:
 
 - `R = Y * Z`
 - `L = M`
@@ -394,7 +439,7 @@ gh = np.array([
 ])
 ```
 
-`AT610` sets both derivative flags to `True`, and Reliafy uses the analytic gradient and Hessian during FORM convergence and SORM curvature fitting — as confirmed by the validation notes in the run results.
+`AT610` sets both derivative flags to `True`, so Reliafy uses the analytic gradient and Hessian during FORM convergence and SORM curvature fitting.
 
 ## Common Authoring Pitfalls
 

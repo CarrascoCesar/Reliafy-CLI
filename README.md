@@ -42,15 +42,28 @@ reliafy profile rename oldname newname
 
 ## Full Documentation
 
-The complete documentation site is built with MkDocs Material.
+Read the full documentation at:
 
-- Site navigation mirrors CLI commands and common tasks.
-- To preview the docs locally, run `mkdocs serve` from the project root and open the URL printed in the terminal (typically `http://127.0.0.1:8000`).
+- https://reliafy.pages.dev/
 
 ## Requirements
 
 - Python 3.10+
 - Internet connection for API access and authentication
+
+## Testing
+
+Unit and integration tests are provided in the `tests/` directory.
+
+```zsh
+# Run unit tests
+python -m unittest discover tests -p 'test_*.py' -v
+
+# Run integration tests with real API calls
+RELIAFY_RUN_API_TESTS=1 python -m unittest tests.test_cli_api_integration -v
+```
+
+See [TESTING.md](TESTING.md) for details on test structure and rate limit behavior.
 
 ## Notes
 

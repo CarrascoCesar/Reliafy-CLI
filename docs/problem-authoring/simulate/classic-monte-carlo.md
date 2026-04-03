@@ -12,12 +12,12 @@ Problem module:
 
 Recorded result set:
 
-- `results/2026-03-16/10-52-46/Chan2-51baa.xlsx`
-- `results/2026-03-16/10-52-46/Chan2-51baa.json`
-- `results/2026-03-16/10-52-46/Chan2-51baa.py`
-- `results/2026-03-16/10-52-46/Chan2-51baa.pickle`
-- `results/2026-03-16/10-52-46/Chan2-51baa.pdf`
-- `results/2026-03-16/10-52-46/profile-51baa.yaml`
+- `results/2026-04-02/20-31-44/Chan2-a1af3.xlsx`
+- `results/2026-04-02/20-31-44/Chan2-a1af3.json`
+- `results/2026-04-02/20-31-44/Chan2-a1af3.py`
+- `results/2026-04-02/20-31-44/Chan2-a1af3.pickle`
+- `results/2026-04-02/20-31-44/Chan2-a1af3.pdf`
+- `results/2026-04-02/20-31-44/profile-a1af3.yaml`
 
 Profile and run mode from saved profile:
 
@@ -81,15 +81,15 @@ Because `LSFreturnsLandR: True`, the CLI generates a **Load and Resistance Histo
 
 ## Extracted Results Worksheet Tables
 
-The tables below are transcribed from the `Results` worksheet in `Chan2-51baa.xlsx`.
+The tables below are transcribed from the `Results` worksheet in `Chan2-a1af3.xlsx`.
 
 #### Header Information
 
 | Field | Value |
 |---|---|
 | Problem | `Chan2` |
-| Request ID | `9614c856e5bb41f4b96bd9b1d4051baa` |
-| Run time | `00 min 25.62 sec` |
+| Request ID | `c89975be9921407491d307b104ea1af3` |
+| Run time | `00 min 03.51 sec` |
 
 #### Deterministic Variables
 
@@ -114,7 +114,7 @@ The tables below are transcribed from the `Results` worksheet in `Chan2-51baa.xl
 
 | beta | pf | cv | max_cv | size | %_removed | cycles | auto_size | mc_with_is |
 |---:|---:|---:|---:|---:|---:|---:|---|---|
-| 1.5409 | 0.06167 | 0.002252 | 0.05 | 3,000,000 | 0.000733 | 3 | True | False |
+| 1.5408 | 0.06169 | 0.002252 | 0.05 | 3,000,000 | 0.0007 | 3 | True | False |
 
 #### Monte Carlo Variable Statistics and Correlations
 
@@ -122,56 +122,58 @@ The sampled statistics confirm the input distributions and correlation structure
 
 | var_name | mean | std | %_oob | cor(cp) | cor(fp) | cor(g) | cor(Ph) | cor(Pv) |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
-| cp | 14.9993 | 4.4999 | 0 | 1.0000 | −0.4999 | 0.0003 | 0.0003 | 0.0008 |
-| fp | 24.9972 | 4.9994 | 0 | −0.4999 | 1.0000 | 0.5003 | −0.0008 | 0.0000 |
-| g | 19.9997 | 2.0012 | 0 | 0.0003 | 0.5003 | 1.0000 | 0.0001 | 0.0008 |
-| Ph | 400.035 | 39.985 | 0 | 0.0003 | −0.0008 | 0.0001 | 1.0000 | 0.5006 |
-| Pv | 799.993 | 79.962 | 0 | 0.0008 | 0.0000 | 0.0008 | 0.5006 | 1.0000 |
+| cp | 15.0023 | 4.5010 | 0 | 1.0000 | −0.4994 | 0.0003 | −0.0007 | −0.0004 |
+| fp | 24.9984 | 5.0013 | 0 | −0.4994 | 1.0000 | 0.4997 | 0.0000 | 0.0002 |
+| g | 20.0017 | 1.9998 | 0 | 0.0003 | 0.4997 | 1.0000 | −0.0005 | 0.0001 |
+| Ph | 399.944 | 39.978 | 0 | −0.0007 | 0.0000 | −0.0005 | 1.0000 | 0.4998 |
+| Pv | 799.836 | 79.992 | 0 | −0.0004 | 0.0002 | 0.0001 | 0.4998 | 1.0000 |
 
 #### Notes Reported by Reliafy
 
 1. Validation: Stochastic variables definition and limit state function validation required 1 function call.
 2. Monte Carlo: Completed 3 cycles with `1.00e+06` samples per cycle.
-3. Monte Carlo: Detected 22 NaN values in the limit state function out of `3.00e+06` samples. Review the list of code warnings and update the limit state function to address their source.
+3. Monte Carlo: Detected 21 NaN values in the limit state function out of `3.00e+06` samples. Review the list of code warnings and update the limit state function to address their source.
+4. Monte Carlo: If a large fraction of values are invalid, consider adjusting the statistical distributions of the variables, truncating them to finite lower (`lb`) and upper (`ub`) bounds, and defining constraints on the variables to avoid invalid results.
 
 ### Interpretation Snapshot
 
 - `beta = 1.541`, `pf = 6.17%` — a relatively low reliability index for a bearing-capacity problem with correlated soil parameters.
 - The coefficient of variation (`cv = 0.00225`) is well below `max_cv = 0.05`, indicating high MC precision with 3 million samples.
 - The sampled correlation matrix closely matches the targets: `cor(cp, fp) ≈ −0.500`, `cor(fp, g) ≈ 0.500`, `cor(Ph, Pv) ≈ 0.501`.
-- A small number of NaN results (22 out of 3,000,000) were detected. These typically arise from geometric degeneration in the bearing-capacity formula (e.g., `B' ≤ 0` due to large eccentricity). They do not invalidate the result at this sample size.
+- A small number of NaN results (21 out of 3,000,000) were detected. These typically arise from geometric degeneration in the bearing-capacity formula (e.g., `B' ≤ 0` due to large eccentricity). They do not invalidate the result at this sample size.
+- Reliafy also reported that if invalid values become more frequent, finite `lb` and `ub` bounds or explicit variable constraints are the first things to revisit.
 
 ### Generated Figures
 
-The PDF result file for this run is saved as `results/2026-03-16/10-52-46/Chan2-51baa.pdf`.
-That PDF is composed of vector-based pages, rendered below at 2× resolution from each page.
+The PDF result file for this run is saved as `results/2026-04-02/20-31-44/Chan2-a1af3.pdf`.
+The PNGs below were regenerated from the saved Matplotlib pickle in the same result set so they match the current histogram bin capping used by the API.
 
 #### Figure 1: MC Histogram — `cp`
 
-![Chan2 MC histogram for cp](../images/chan2-51baa-01-cp-histogram.png)
+![Chan2 MC histogram for cp](../images/chan2-a1af3-01-cp-histogram.png)
 
 #### Figure 2: MC Histogram — `fp`
 
-![Chan2 MC histogram for fp](../images/chan2-51baa-02-fp-histogram.png)
+![Chan2 MC histogram for fp](../images/chan2-a1af3-02-fp-histogram.png)
 
 #### Figure 3: MC Histogram — `g`
 
-![Chan2 MC histogram for g](../images/chan2-51baa-03-g-histogram.png)
+![Chan2 MC histogram for g](../images/chan2-a1af3-03-g-histogram.png)
 
 #### Figure 4: MC Histogram — `Ph`
 
-![Chan2 MC histogram for Ph](../images/chan2-51baa-04-Ph-histogram.png)
+![Chan2 MC histogram for Ph](../images/chan2-a1af3-04-Ph-histogram.png)
 
 #### Figure 5: MC Histogram — `Pv`
 
-![Chan2 MC histogram for Pv](../images/chan2-51baa-05-Pv-histogram.png)
+![Chan2 MC histogram for Pv](../images/chan2-a1af3-05-Pv-histogram.png)
 
 #### Figure 6: Histogram of Limit State Function Values
 
-![Chan2 limit state function histogram](../images/chan2-51baa-06-lsf-histogram.png)
+![Chan2 limit state function histogram](../images/chan2-a1af3-06-lsf-histogram.png)
 
 #### Figure 7: Load and Resistance Histogram
 
 Generated because `LSFreturnsLandR: True` in the problem file.
 
-![Chan2 load and resistance histogram](../images/chan2-51baa-07-load-resistance.png)
+![Chan2 load and resistance histogram](../images/chan2-a1af3-07-load-resistance.png)

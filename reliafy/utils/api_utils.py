@@ -184,7 +184,7 @@ def handle_rate_limit_error(response: requests.Response) -> None:
     limit_exceeded = error_data.get("limit_exceeded", "Unknown limit")
     all_limits = error_data.get("all_limits", "Unknown limits")
     reason = error_data.get("reason", "Rate limiting active")
-    suggestion = error_data.get("suggestion", "Please wait before retrying")
+    suggestion = error_data.get("suggestion", "Please wait 15 seconds before retrying")
 
     console.print("\n" + "=" * 60, style="red")
     console.print(f"{ICON_ERR} RATE LIMIT EXCEEDED", style="bold red")
@@ -303,7 +303,7 @@ def download_results(
 
     Args:
         url: API base URL
-        problem: Problem dictionary with Request_ID
+        problem_json: Problem dictionary with Request_ID
         results_dir: Directory to save results (typically timestamped)
         reporting_options: Options for what files to download
         max_retries: Number of retry attempts for failed downloads
@@ -635,9 +635,10 @@ def run_app(
 
     # 7) Create timestamped directory for this run
     timestamped_dir = get_timestamped_results_dir(results_path)
-    # console.print(f"{ICON_INFO} Results timestamped_dir created: {timestamped_dir.relative_to(results_path.parent)}\n")
+    rel_path = timestamped_dir.relative_to(results_path.parent)
+    file_uri = timestamped_dir.as_uri()
     console.print(
-        f"{ICON_OK} Result files, a copy of the problem file, and the profile will be saved to: {timestamped_dir}\n"
+        f"{ICON_OK} Result files, a copy of the problem file, and the profile will be saved to: [link={file_uri}]{rel_path}[/link]\n"
     )
 
     # 8) Save server returned problem to timestamped directory as JSON
@@ -683,6 +684,11 @@ def run_app(
     if open_results:
         open_result_files(file_paths, file_downloaded)
         show_pickle_plots(problem_json, file_paths, reporting_options, file_downloaded)
+    else:
+        console.print()
+        console.print(
+            f"{ICON_INFO} Results are ready in: [link={file_uri}]{rel_path}[/link]. Use --open-results or -o to open them automatically when running the command.\n"
+        )
 
     return problem_json
 
@@ -754,5 +760,17 @@ def get_problem_file_name_tk(problems_path: Path) -> Path | None:
             return p
     return None
 
+
+# api_utils.py
+
+# api_utils.py
+
+# api_utils.py
+
+# api_utils.py
+
+# api_utils.py
+
+# api_utils.py
 
 # api_utils.py

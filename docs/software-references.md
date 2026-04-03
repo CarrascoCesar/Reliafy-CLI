@@ -4,7 +4,7 @@ This section covers the Python packages that Reliafy CLI and its backing API dep
 
 ## Dependency Sets
 
-- [CLI Dependencies and Citations](software-references-cli.md): packages users install locally to run Reliafy CLI. Use this page when citing software in papers, reports, and technical notes.
+- [CLI Dependencies and Citations](software-references-cli.md): packages users install locally to run Reliafy CLI. Use this page if you need dependency-level software attribution in papers, reports, or technical notes.
 - [API Library Credits](software-references-api.md): packages used internally by the Reliafy API, documented here for software attribution. These are not installation requirements for CLI users.
 
 ## Citation Policy

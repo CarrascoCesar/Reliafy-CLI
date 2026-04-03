@@ -267,7 +267,7 @@ Use these references as starting points for method details and implementation ba
 
 **`is_method: "mpp_normal"`**
 
-- Centers the importance sampling proposal distribution on the Most Probable Point (MPP), also called the design point or failure point. The MPP is the point on the limit-state surface closest to the origin in standard normal space, found by FORM. A Gaussian proposal centered there concentrates samples near the dominant failure region. See the FORM method and the textbooks listed on the [home page](../index.md#recommended-texts).
+- Centers the importance sampling proposal distribution on the Most Probable Point (MPP), also called the design point or failure point. The MPP is the point on the limit-state surface closest to the origin in standard normal space, found by FORM. A Gaussian proposal centered there concentrates samples near the dominant failure region. See the FORM method and the textbooks listed on [Recommended Texts](../problem-authoring/recommended-texts.md).
 
 **Example:**
 
@@ -346,4 +346,4 @@ reliability_options:
 
 - Enum-style fields accept either the enum member name (case-insensitive) or the enum value
 - Out-of-range or invalid values trigger a profile validation error
-- Set `form_seed`, `design_seed`, and/or `mc_seed` to a non-null integer for repeatable runs when random number generation is involved
+- Set `form_seed`, `design_seed`, and/or `mc_seed` to a non-null integer for repeatable results when random number generation is involved

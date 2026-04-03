@@ -1,6 +1,6 @@
 # Authentication
 
-Reliafy CLI requires authentication with the Reliafy API to run analyses, design optimizations, and simulations.
+Reliafy CLI requires authentication with the Reliafy API to run analyses, design workflows, and simulations.
 
 Authentication is provided through [Auth0](https://auth0.com), a widely used identity platform.
 
@@ -48,6 +48,9 @@ This displays:
 - Authentication credentials are stored locally and not transmitted except to the Reliafy API
 - No client secret is used in the CLI - only public Auth0 values (domain, client ID, audience)
 
+!!! info "File lifecycle on the API"
+    Reliafy does not keep uploaded problem modules or generated run artifacts on the API host after run completion. Backend file cleanup uses secure deletion (`srm`) for submitted problem files and generated outputs.
+
 ## Troubleshooting
 
 If you encounter authentication issues:
@@ -59,4 +62,4 @@ If you encounter authentication issues:
 3. Verify your user account has proper permissions
 4. Try re-authenticating: `reliafy user auth`
 
-For persistent issues, contact support or check the Reliafy API documentation.
+For persistent issues, contact support at [reliafy.app@gmail.com](mailto:reliafy.app@gmail.com) or see the [Contact section](index.md#contact).

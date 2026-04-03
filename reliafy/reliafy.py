@@ -105,6 +105,15 @@ def analyze(
         bool,
         typer.Option("--open-results", "-o", help=open_results_help, rich_help_panel="General"),
     ] = False,
+    problem_file: Annotated[
+        Path | None,
+        typer.Option(
+            "--problem-file",
+            help="Path to the problem file (.py) to run",
+            hidden=True,
+            rich_help_panel="General",
+        ),
+    ] = None,
 ):
     """Run reliability analysis with specified options."""
     (
@@ -164,6 +173,7 @@ def analyze(
         reliability_options.model_dump(mode="json"),
         profile,
         open_results=open_results,
+        problem_file_path=problem_file,
     )
     console.print()
 
@@ -182,6 +192,15 @@ def design(
         bool,
         typer.Option("--open-results", "-o", help=open_results_help, rich_help_panel="General"),
     ] = False,
+    problem_file: Annotated[
+        Path | None,
+        typer.Option(
+            "--problem-file",
+            help="Path to the problem file (.py) to run",
+            hidden=True,
+            rich_help_panel="General",
+        ),
+    ] = None,
 ):
     """Run reliability-based design optimization with specified options."""
     (
@@ -217,6 +236,7 @@ def design(
         reliability_options.model_dump(mode="json"),
         profile,
         open_results=open_results,
+        problem_file_path=problem_file,
     )
     console.print()
 
@@ -251,6 +271,15 @@ def simulate(
         bool,
         typer.Option("--open-results", "-o", help=open_results_help, rich_help_panel="General"),
     ] = False,
+    problem_file: Annotated[
+        Path | None,
+        typer.Option(
+            "--problem-file",
+            help="Path to the problem file (.py) to run",
+            hidden=True,
+            rich_help_panel="General",
+        ),
+    ] = None,
 ):
     """Run Monte Carlo simulation with specified options."""
     (
@@ -325,6 +354,7 @@ def simulate(
         reliability_options.model_dump(mode="json"),
         profile,
         open_results=open_results,
+        problem_file_path=problem_file,
     )
     console.print()
 

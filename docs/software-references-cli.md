@@ -1,6 +1,6 @@
 # CLI Dependencies and Citations
 
-This page lists the top-level Python packages that Reliafy CLI depends on. Use it as a reference for citing software libraries in papers, reports, and technical notes.
+This page lists the top-level Python packages that Reliafy CLI depends on. Use it if you need dependency-level software attribution in papers, reports, or technical notes.
 
 If you are citing Reliafy itself, cite the Zenodo software record: Carrasco, C. (2026). *Reliafy CLI*. Zenodo. <https://doi.org/10.5281/zenodo.19267557>. If you need a fixed-version citation, use the version-specific Zenodo DOI for that release.
 
@@ -8,7 +8,7 @@ Only direct, top-level dependencies are listed — transitive packages installed
 
 ## Preferred Citation Sources
 
-Use the project-recommended references below:
+If you need to cite a dependency, use the preferred references below:
 
 - NumPy: Harris, C. R., Millman, K. J., van der Walt, S. J., et al. (2020). *Array programming with NumPy*. *Nature*, 585, 357-362. <https://doi.org/10.1038/s41586-020-2649-2>
 - Matplotlib: Hunter, J. D. (2007). *Matplotlib: A 2D Graphics Environment*. *Computing in Science and Engineering*, 9(3), 90-95. <https://doi.org/10.1109/MCSE.2007.55>

@@ -45,3 +45,6 @@ This behavior is intentional and matches the design-run notes documented in the 
 - Every run gets a new request ID, so `<suffix>` changes every run.
 - The timestamped directory and filenames are deterministic for a given run ID.
 - `design` runs may produce fewer plot files than `analyze` or `simulate`, depending on reporting options and run type.
+
+!!! info "API-side file retention"
+	Reliafy does not retain run files on the API side after processing completes. Submitted problem modules and generated artifacts (for example `.xlsx`, `.pdf`, and `.pickle`) are removed using secure deletion (`srm`).

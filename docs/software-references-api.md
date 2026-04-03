@@ -6,7 +6,7 @@ Only direct, top-level dependencies are listed — transitive packages installed
 
 ## Preferred Citation Sources
 
-Use the project-recommended references below:
+If you need to cite an API dependency, use the preferred references below:
 
 - scikit-learn: Pedregosa, F., Varoquaux, G., Gramfort, A., et al. (2011). *Scikit-learn: Machine Learning in Python*. *Journal of Machine Learning Research*, 12, 2825-2830. <https://jmlr.csail.mit.edu/papers/v12/pedregosa11a.html>
 - ArviZ: Kumar, R., Carroll, C., Hartikainen, A., and Martin, O. (2019). *ArviZ a unified library for exploratory analysis of Bayesian models in Python*. *Journal of Open Source Software*, 4(33), 1143. <https://doi.org/10.21105/joss.01143>
