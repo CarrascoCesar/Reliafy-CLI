@@ -3,7 +3,7 @@
 This page is for users who are new to command-line tools.
 
 !!! note "Prerequisites"
-    You need Python installed and a working terminal. If you're starting from scratch, see the [Python setup guide](https://docs.python-guide.org/starting/installation/) for macOS, Linux, and Windows.
+    You need Python installed and a working terminal. An IDE is optional but recommended for editing problem files, especially if you are new to Python. If you are starting from scratch, see the [Getting Started with Python in VS Code](https://code.visualstudio.com/docs/python/python-tutorial) guide.
 
 ## What Is a CLI?
 
