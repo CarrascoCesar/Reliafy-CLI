@@ -1,0 +1,23 @@
+{
+  "name": "Reliafy CLI",
+  "short_name": "Reliafy",
+  "description": "Documentation for the Reliafy CLI reliability analysis tool.",
+  "icons": [
+    {
+      "src": "Reliafy%20favicon%20192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "Reliafy%20favicon%20512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#ffffff",
+  "theme_color": "#ff5722"
+}

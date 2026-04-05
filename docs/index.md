@@ -1,12 +1,20 @@
 # Reliafy CLI: FORM, SORM, RBDO, and Monte Carlo Simulation in Python
 
-Reliafy CLI is a Python-based command-line interface for reliability analysis, reliability-based design optimization, and simulation workflows with profile-based configuration.
+Reliafy CLI is a Python command-line tool for reliability analysis, reliability-based design optimization, and simulation workflows using profile-based configuration.
 
-Core capabilities include First-Order Reliability Method (FORM), Second-Order Reliability Method (SORM), Inverse FORM, Inverse SORM, Reliability-Based Design Optimization (RBDO), Monte Carlo simulation, and Importance Sampling for rare-event probability estimation. These workflows cover forward reliability evaluation, reliability-constrained design, and post-design simulation using a consistent problem-module interface, including correlated and non-normal random-variable models.
+It supports FORM, SORM, Inverse FORM, Inverse SORM, Reliability-Based Design Optimization (RBDO), Monte Carlo simulation, and Importance Sampling for rare-event probability estimation, with correlated and non-normal random-variable support via Nataf transformation.
 
-Run outputs are designed for practical engineering decisions and reporting workflows. Depending on options, results include reliability metrics and design points, tabulated summaries (Excel/JSON), plot reports (PDF), and pickled Matplotlib figure objects for post-processing.
+Run outputs include reliability metrics and design points, tabulated summaries (Excel/JSON), plot reports (PDF), and pickled Matplotlib figure objects for post-processing.
 
-The documentation is written for practical use rather than theory derivation. It does not include in-depth theoretical derivations or detailed theory-first explanations. Across analysis, design, and simulation workflows, method descriptions are intentionally concise, and most method-specific references are consolidated in the [Profile Options Reference](profiles/profile-reference.md).
+The documentation is written for practical use. Method descriptions are intentionally concise, and method-specific references are consolidated in the [Profile Options Reference](profiles/profile-reference.md).
+
+## New to CLI?
+
+A CLI (command-line interface) is a way to run tools by typing commands in a terminal window.
+
+Reliafy CLI uses this workflow because it reduces custom scripting for routine workflows, supports reproducible runs, and enables easy automation.
+
+If you are new to terminal-based tools, start with [CLI Basics for Reliafy Users](cli/basics.md) for a short orientation and first-run checklist.
 
 !!! info "Pricing and Sustainability Notice"
     Reliafy CLI is **free to use** at this time. The CLI communicates with a hosted API, and the associated computation and infrastructure costs are currently funded by the developer during this early phase of operation.
@@ -24,7 +32,7 @@ Typical use cases include:
 - Courses on risk and reliability methods, structural reliability, probabilistic analysis of failure, and advanced probability and statistics.
 - Research at universities and research centers focused on reliability methods, failure analysis, code calibration and development, and related uncertainty-quantification workflows.
 
-Recommended background readings are listed at [Recommended Texts](problem-authoring/recommended-texts.md).
+Recommended background readings are listed at [Recommended Texts and References](problem-authoring/recommended-texts.md).
 
 ## Core Workflows
 

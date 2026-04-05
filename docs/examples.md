@@ -20,7 +20,7 @@ This creates a local `./problems/` folder in your current directory.
 
 ## Listing Available Examples
 
-After copying, list the available local example files:
+List the packaged example files available in your installed Reliafy package:
 
 ```bash
 reliafy examples list
@@ -32,7 +32,9 @@ Alias:
 reliafy examples ls
 ```
 
-This displays a table of the example problems available in `./problems/`.
+This displays a table of packaged example problems.
+
+To see files copied into your local working directory, inspect `./problems/` directly.
 
 ## Using Example Problems
 
@@ -56,4 +58,4 @@ Monte Carlo simulation:
 reliafy simulate default --plot-pdfs
 ```
 
-Profiles configure run settings, but they do not store the selected problem file path.
+The problem file is selected at run time for each command and is not persisted as part of the command options.

@@ -1,12 +1,21 @@
 # Reliafy CLI
 
-Reliafy CLI is a Python-based command-line interface for reliability analysis, reliability-based design optimization, and simulation workflows with profile-based configuration.
+Reliafy CLI is a Python command-line tool for reliability analysis, reliability-based design optimization, and simulation workflows using profile-based configuration.
 
-Core capabilities include First-Order Reliability Method (FORM), Second-Order Reliability Method (SORM), Inverse FORM, Inverse SORM, Monte Carlo simulation, and Importance Sampling for rare-event probability estimation. These workflows cover forward reliability evaluation, reliability-constrained design, and post-design simulation using a consistent problem-module interface. Reliafy supports correlated, non-normal random variables through the Nataf transformation, an isoprobabilistic mapping to standard normal space.
+It supports FORM, SORM, Inverse FORM, Inverse SORM, Monte Carlo simulation, and Importance Sampling for rare-event probability estimation. Workflows cover forward reliability evaluation, reliability-constrained design, and post-design simulation with a consistent problem-module interface and support for correlated non-normal variables via Nataf transformation.
 
-Run outputs are designed for practical engineering decisions and reporting workflows. Depending on options, results include reliability metrics and design points, tabulated summaries (Excel/JSON), plot reports (PDF), and pickled Matplotlib figure objects for post-processing.
+Run outputs are designed for engineering decisions and reporting, including reliability metrics and design points, tabulated summaries (Excel/JSON), plot reports (PDF), and pickled Matplotlib figure objects for post-processing.
 
-## Quick Start
+## What Reliafy CLI Does
+
+- Reliability analysis with FORM and SORM
+- Reliability-based design with inverse FORM/SORM workflows
+- Monte Carlo and importance sampling simulation
+- Profile-based YAML configuration for repeatable runs
+
+## Install and Quick Start
+
+On first use, Reliafy will prompt you to authenticate. If you do not already have an account, you can create one during the sign-in flow.
 
 ```zsh
 # Install from PyPI
@@ -22,7 +31,7 @@ reliafy examples copy
 reliafy analyze default --include-sorm --plot-rfad
 ```
 
-## Profiles
+## Profile Management
 
 Profiles are YAML files under `profiles/` that control run options.
 
@@ -44,14 +53,14 @@ reliafy profile rename oldname newname
 
 Read the full documentation at:
 
-- https://reliafy.pages.dev/
+- https://reliafy.app/
 
 ## Requirements
 
 - Python 3.10+
 - Internet connection for API access and authentication
 
-## Testing
+## Testing and Validation
 
 Unit and integration tests are provided in the `tests/` directory.
 

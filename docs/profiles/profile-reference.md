@@ -133,7 +133,7 @@ These settings apply to both FORM and Inverse FORM.
 | Option | Type | Default | Values | Description |
 |--------|------|---------|--------|-------------|
 | `alpha_direction` | str | `"outward"` | `"outward"`, `"inward"` | Direction convention for the alpha vector |
-| `use_nearest_correlation` | bool | `false` | - | Controls fallback behavior when Cholesky decomposition of the correlation matrix fails. If `false`, the run stops with an error. If `true`, Reliafy attempts to replace the matrix with a nearest positive semidefinite (PSD) correlation matrix using the method in [Higham and Strabić (2011)](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=1969689). |
+| `use_nearest_correlation` | bool | `false` | - | Controls fallback behavior when Cholesky decomposition of the correlation matrix fails. If `false`, the run stops with an error. If `true`, Reliafy attempts to replace the matrix with a nearest positive semidefinite (PSD) correlation matrix using the methodology in [Rebonato and Jaeckel (2011)](https://ssrn.com/abstract=1969689) ([DOI](http://dx.doi.org/10.2139/ssrn.1969689)). |
 | `qn_epsilon` | float | `1e-8` | [1e-8, 1e-2] | Tolerance used by the quasi-Newton SR1 (Symmetric Rank 1) update when `sor_fit_method` is set to `SR1` |
 
 ### SORM Settings
@@ -172,7 +172,7 @@ Use these references as starting points for method details and derivation nuance
 
 - `Paraboloid`: Local quadratic fit of the failure surface at the design point, using principal curvatures.
 - `Taylor2`: Second-order Taylor expansion of the limit-state function at the design point.
-- Reference: Tvedt, L. (1990). "Distribution of quadratic forms in normal space-application to structural reliability." *J. Eng. Mech.*, ASCE, 116(6), 1183-1197. [→](https://ascelibrary.org/doi/10.1061/%28ASCE%290733-9399%281990%29116%3A6%281183%29)
+- Reference: Tvedt, L. (1990). "Distribution of quadratic forms in normal space: application to structural reliability." *J. Eng. Mech.*, ASCE, 116(6), 1183-1197. [→](https://ascelibrary.org/doi/10.1061/%28ASCE%290733-9399%281990%29116%3A6%281183%29)
 
 **`sor_fit_method`**
 
@@ -267,7 +267,7 @@ Use these references as starting points for method details and implementation ba
 
 **`is_method: "mpp_normal"`**
 
-- Centers the importance sampling proposal distribution on the Most Probable Point (MPP), also called the design point or failure point. The MPP is the point on the limit-state surface closest to the origin in standard normal space, found by FORM. A Gaussian proposal centered there concentrates samples near the dominant failure region. See the FORM method and the textbooks listed on [Recommended Texts](../problem-authoring/recommended-texts.md).
+- Centers the importance sampling proposal distribution on the Most Probable Point (MPP), also called the design point or failure point. The MPP is the point on the limit-state surface closest to the origin in standard normal space, found by FORM. A Gaussian proposal centered there concentrates samples near the dominant failure region. See the FORM method and the references listed on [Recommended Texts and References](../problem-authoring/recommended-texts.md).
 
 **Example:**
 

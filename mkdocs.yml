@@ -7,8 +7,9 @@ hooks:
 copyright: Copyright &copy; 2026 Reliafy. All rights reserved. Copyright registration pending.
 theme:
   name: material
+  custom_dir: overrides
   logo: Reliafy logo.png
-  favicon: Reliafy logo.png
+  favicon: Reliafy favicon 32x32.png
   palette:
     - media: "(prefers-color-scheme: light)"
       scheme: default
@@ -40,6 +41,7 @@ nav:
   - Home: index.md
   - Packaged Examples: examples.md
   - CLI Commands:
+    - CLI Basics for Reliafy Users: cli/basics.md
     - Command Overview: cli/command-overview.md
     - Analyze: cli/analyze.md
     - Design: cli/design.md
@@ -61,7 +63,7 @@ nav:
     - Simulate:
       - Classic Monte Carlo: problem-authoring/simulate/classic-monte-carlo.md
       - Importance Sampling: problem-authoring/simulate/importance-sampling.md
-    - Recommended Texts: problem-authoring/recommended-texts.md
+    - Recommended Texts and References: problem-authoring/recommended-texts.md
   - Software References:
     - Overview: software-references.md
     - CLI Dependencies and Citations: software-references-cli.md
