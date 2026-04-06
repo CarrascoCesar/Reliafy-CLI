@@ -4,13 +4,13 @@
   "description": "Documentation for the Reliafy CLI reliability analysis tool.",
   "icons": [
     {
-      "src": "Reliafy%20favicon%20192x192.png",
+      "src": "Reliafy%20favicon%20192x192o.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "Reliafy%20favicon%20512x512.png",
+      "src": "Reliafy%20favicon%20512x512o.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
