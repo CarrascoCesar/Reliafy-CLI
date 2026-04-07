@@ -104,7 +104,6 @@ See [Auth](auth.md) for full flow details and troubleshooting.
 
 - Python 3.10+
 - Internet connection for API access and authentication
-- Valid Reliafy API credentials
 
 ## Getting Help
 

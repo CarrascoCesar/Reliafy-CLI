@@ -149,7 +149,9 @@ def device_login_flow() -> dict | None:
     if not link:
         console.print(f"{ICON_ERR} Missing verification link in response.")
         return None
-    console.print(f"{ICON_LINK} Going to: [bold blue]{link}[/bold blue] to authorize this device.")
+    console.print(
+        f"{ICON_LINK} Going to: [bold blue]{link}[/bold blue] to authorize device [bold green]{device_data.get('user_code', '')}[/bold green]."
+    )
     webbrowser.open(link)
 
     # Start polling
@@ -266,4 +268,5 @@ def get_token() -> str | None:
     return tokens.get("access_token")
 
 
+# auth_cli.py
 # auth_cli.py

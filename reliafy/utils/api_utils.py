@@ -525,9 +525,10 @@ def run_app(
 
     # 2b) Ask user for problem file
     if problem_file_path is None:
-        console.print(f"{ICON_INFO} Please select a problem file from the popup menu.\n")
+        console.print(f"{ICON_INFO} Please select a problem file from the popup menu")
         selected_file = get_problem_file_name(Path(problems_path))
         if not selected_file:
+            console.print(f"{ICON_ERR} No problem file selected. Exiting.\n")
             raise SystemExit(1)
     else:
         selected_file = str(problem_file_path)
@@ -538,6 +539,7 @@ def run_app(
         console.print(f"{ICON_ERR} Cannot proceed with invalid problem module: {problem_file_path.name}")
         raise SystemExit(1)
 
+    console.print()
     console.print(f"{ICON_OK} Successfully validated problem module: {problem_file_path.name}")
 
     # 3) Build options (serialized)
