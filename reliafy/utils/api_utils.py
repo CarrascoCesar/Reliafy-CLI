@@ -16,6 +16,7 @@ import subprocess
 import sys
 import time
 import traceback
+import webbrowser
 from collections import OrderedDict
 from datetime import datetime, timedelta
 from pathlib import Path
@@ -220,6 +221,63 @@ def handle_other_http_errors(response: requests.Response, context_msg: str = "Er
         console.print(f"{ICON_ERR} {context_msg}: status code: {response.status_code}: {response.text}", style="red")
     finally:
         console.print("=" * 60 + "\n", style="red")
+
+
+def _extract_error_detail(response: requests.Response) -> tuple[str, str | None]:
+    """Return (message, machine_code) from a FastAPI error response."""
+    try:
+        error_data = response.json()
+    except json.JSONDecodeError:
+        return response.text, None
+
+    detail = error_data.get("detail", error_data)
+
+    # Handle detail as dict: {"code": "subscription_required", "message": "..."}
+    if isinstance(detail, dict):
+        code = detail.get("code")
+        msg = detail.get("message") or detail.get("detail") or str(detail)
+        return str(msg), str(code) if code is not None else None
+
+    # Handle detail as string or any other value
+    return str(detail), None
+
+
+def _prompt_and_open_subscription_checkout(api_base_url: str, access_token: str) -> None:
+    """Offer checkout flow when the API reports subscription is required."""
+    answer = console.input(f"{ICON_ASK} Subscription required. Open checkout now? [Y/n]: ").strip().lower()
+    if answer not in {"", "y", "yes"}:
+        console.print(f"{ICON_INFO} You can subscribe later using: reliafy user subscribe")
+        return
+
+    endpoint = f"{api_base_url.rstrip('/')}/billing/checkout-session"
+    try:
+        resp = requests.post(endpoint, headers={"Authorization": f"Bearer {access_token}"}, timeout=30)
+    except requests.exceptions.RequestException as exc:
+        console.print(f"{ICON_ERR} Failed to create checkout session: {exc}")
+        return
+
+    if resp.status_code >= 400:
+        msg, _ = _extract_error_detail(resp)
+        console.print(f"{ICON_ERR} Could not create checkout session ({resp.status_code}): {msg}")
+        return
+
+    try:
+        payload = resp.json()
+    except json.JSONDecodeError:
+        console.print(f"{ICON_ERR} Invalid response from checkout-session endpoint.")
+        return
+
+    checkout_url = payload.get("checkout_url")
+    if not checkout_url:
+        console.print(f"{ICON_ERR} Checkout URL missing in checkout-session response.")
+        return
+
+    console.print(f"{ICON_INFO} Checkout URL: {checkout_url}")
+    opened = webbrowser.open(checkout_url)
+    if opened:
+        console.print(f"{ICON_OK} Opened checkout page in your default browser.")
+    else:
+        console.print(f"{ICON_WARN} Could not open browser automatically. Please open the URL above manually.")
 
 
 def download_single_file(
@@ -566,6 +624,22 @@ def run_app(
         if post_resp is not None:
             if post_resp.status_code == 429:
                 handle_rate_limit_error(post_resp)
+            elif post_resp.status_code == 403:
+                msg, code = _extract_error_detail(post_resp)
+                normalized_code = (code or "").strip().lower()
+                if (
+                    normalized_code
+                    in {
+                        "subscription_required",
+                        "subscription_not_active",
+                        "subscription_expired",
+                    }
+                    or "subscription" in msg.lower()
+                ):
+                    console.print(f"{ICON_WARN} {msg}")
+                    _prompt_and_open_subscription_checkout(url, access_token)
+                else:
+                    handle_other_http_errors(post_resp, "App request failed")
             else:
                 handle_other_http_errors(post_resp, "App request failed")
         else:
@@ -762,14 +836,6 @@ def get_problem_file_name_tk(problems_path: Path) -> Path | None:
             return p
     return None
 
-
-# api_utils.py
-
-# api_utils.py
-
-# api_utils.py
-
-# api_utils.py
 
 # api_utils.py
 

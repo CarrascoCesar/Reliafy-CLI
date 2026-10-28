@@ -6,3 +6,10 @@
     white-space: nowrap;
   }
 }
+/* Set primary and accent colors for the default color scheme to darker
+   orange to improve contrast */
+[data-md-color-scheme="default"] {
+  --md-primary-fg-color: #C2410C;
+  --md-accent-fg-color: #C2410C;
+  --md-typeset-a-color: #C2410C;
+}

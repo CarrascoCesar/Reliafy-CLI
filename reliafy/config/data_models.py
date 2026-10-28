@@ -2,8 +2,9 @@
 from enum import StrEnum
 from typing import ClassVar, Tuple
 
+import matplotlib as mpl
 import numpy as np
-from matplotlib import cm, colors
+from matplotlib import pyplot as plt
 from pydantic import BaseModel, ConfigDict, Field, ValidationInfo, field_validator
 
 
@@ -534,14 +535,14 @@ def validate_cmap(value: str | list | np.ndarray, key: str) -> str | list:
         if np.any(arr < 0) or np.any(arr > 1):
             raise ValueError(f"{key} cmap RGBA values must be in the range [0, 1].")
         try:
-            colors.ListedColormap(arr)
+            mpl.colors.ListedColormap(arr) # This will raise a ValueError if the colormap is invalid
             return arr.tolist()
         except Exception as e:
             raise ValueError(f"{key} cmap must be a valid list for ListedColormap: {e}")
 
     if isinstance(value, str):
         try:
-            cm.get_cmap(value)
+            plt.get_cmap(value) # This will raise a ValueError if the colormap name is invalid
             return value
         except Exception:
             raise ValueError(f"{key} cmap '{value}' is not a valid matplotlib colormap name.")
@@ -704,5 +705,3 @@ class ReportingOptions(BaseModel):
     save_plots_to_pdf: bool = Field(default=True)
     save_plots_to_pickle: bool = Field(default=True)
     save_excel_summary: bool = Field(default=True)
-
-

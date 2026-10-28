@@ -7,6 +7,9 @@ build/
 *.egg-info/
 pip-wheel-metadata/
 
+# Stripe CLI app
+stripe
+
 # MkDocs generated site
 site/
 
