@@ -1,4 +1,4 @@
-from reliafy import main
+from reliafy.moved import main
 
 if __name__ == "__main__":
     import sys

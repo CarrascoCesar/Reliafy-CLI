@@ -4,44 +4,39 @@ build-backend = "hatchling.build"
 
 [project]
 name = "reliafy"
-version = "0.2.2"
-description = "Reliafy CLI for reliability analysis, design optimization, and simulation."
+version = "0.3.0"
+description = "Reliafy is now Brinkpy. Install it with: pip install brinkpy"
 readme = { file = "README.md", content-type = "text/markdown" }
 authors = [{name = "Cesar Carrasco"}]
 requires-python = ">=3.10"
-dependencies = [
-  "typer>=0.9.0",
-  "rich>=13.0.0",
-  "requests>=2.31.0",
-  "numpy>=1.24.0",
-  "matplotlib>=3.7.0",
-  "pydantic>=2.0.0",
-  "pydantic-core>=2.10.0",
-  "typing_extensions>=4.7.0",
-  "filedialpy>=0.1.0",
-  "platformdirs>=3.0.0",
-  "python-dotenv>=1.0.0",
-  "PyJWT>=2.0.0",
-  "PyYAML>=6.0",
+# This final release only points users to Brinkpy, so it needs nothing else.
+dependencies = []
+classifiers = [
+  "Development Status :: 7 - Inactive",
 ]
 
 [project.scripts]
-reliafy = "reliafy.reliafy:app"
+reliafy = "reliafy.moved:main"
 
 [project.urls]
-Homepage = "https://reliafy.pages.dev"
-Documentation = "https://reliafy.pages.dev"
-Repository = "https://github.com/CarrascoCesar/Reliafy-CLI"
+Homepage = "https://brinkpy.app"
+Documentation = "https://brinkpy.app"
+Repository = "https://github.com/BrinkPy/brinkpy-cli"
+"Brinkpy on PyPI" = "https://pypi.org/project/brinkpy/"
 
+# Ship only the notice. The earlier Reliafy code stays in the repository history.
 [tool.hatch.build.targets.wheel]
-packages = ["reliafy"]
-include = [
-  "reliafy/examples/**",
+only-include = [
+  "reliafy/__init__.py",
+  "reliafy/__main__.py",
+  "reliafy/moved.py",
 ]
 
 [tool.hatch.build.targets.sdist]
-include = [
-  "reliafy/**",
-  "reliafy/examples/**",
+only-include = [
+  "reliafy/__init__.py",
+  "reliafy/__main__.py",
+  "reliafy/moved.py",
   "README.md",
+  "pyproject.toml",
 ]

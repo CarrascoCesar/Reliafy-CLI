@@ -1,14 +1,12 @@
 """
-Reliafy CLI - Command-line interface for reliability analysis and design using the Reliafy API.
+Reliafy is now Brinkpy: pip install brinkpy (https://brinkpy.app).
 Copyright (c) 2025 Cesar Carrasco. All rights reserved.
 """
 
-__version__ = "0.2.2"
+__version__ = "0.3.0"
 __author__ = "Cesar Carrasco"
-__email__ = "reliafy.app@gmail.com"  # Optional
-__description__ = "Command-line interface for reliability analysis and design using the Reliafy API"
+__description__ = "Reliafy is now Brinkpy. Install it with: pip install brinkpy"
 
-# You can also expose main components if needed
-from reliafy.reliafy import app as main
+from reliafy.moved import main
 
 __all__ = ["main", "__version__"]
